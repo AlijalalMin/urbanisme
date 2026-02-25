@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Urbanisme\Enums\RequerantTypeEnum;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('requerants', function (Blueprint $table) {
+            $table->id('id_requerant');
+            $table->string('nom')->nullable();
+            $table->string('cin')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('adresse')->nullable();
+            $table->enum('type_requerant', RequerantTypeEnum::values())->nullable();
+            $table->string('ice')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('requerants');
+    }
+};

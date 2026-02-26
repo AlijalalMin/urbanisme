@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Urbanisme\Enums\AuteurInfractionTypeEnum;
+use App\Enums\AuteurInfractionTypeEnum;
 
 return new class extends Migration
 {
@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('auteur_infractions', function (Blueprint $table) {
-            $table->id('id_auteur');
+            $table->id();
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
             $table->string('cin')->nullable();

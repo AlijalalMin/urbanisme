@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('annexes', function (Blueprint $table) {
-            $table->id('id_AN');
+            $table->id();
             $table->string('nom')->nullable();
-            $table->unsignedBigInteger('id_district')->nullable();
-            $table->foreign('id_district')->references('id_Dist')->on('districts')->onDelete('set null'); // Changed from 'District'
+            $table->foreignId('district_id')
+                    ->nullable()
+                    ->constrained('districts')
+                    ->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
        Schema::create('districts', function (Blueprint $table) {
-            $table->id('id_Dist');
+            $table->id();
             $table->string('nom')->nullable();
             $table->string('code_district')->nullable();
             $table->string('gps_zone')->nullable();

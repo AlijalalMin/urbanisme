@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('type_infractions', function (Blueprint $table) { // Changed from 'TypeInfraction'
-            $table->id('id_type');
+            $table->id();
             $table->string('code_type')->nullable();
             $table->string('libelle')->nullable();
             $table->text('description')->nullable();

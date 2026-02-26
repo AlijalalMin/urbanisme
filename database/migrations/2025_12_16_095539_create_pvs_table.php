@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Urbanisme\Enums\PvTypeEnum;
+use App\Enums\PvTypeEnum;
 
 return new class extends Migration
 {
@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pvs', function (Blueprint $table) {
-            $table->id('id_Pv');
+            $table->id();
             $table->string('numero_pv')->nullable();
             $table->string('source')->nullable();
             $table->timestamp('date_pv')->nullable();
@@ -22,11 +22,15 @@ return new class extends Migration
             $table->text('observation')->nullable();
             $table->string('statut')->nullable();
 
-            $table->unsignedBigInteger('id_dossier')->nullable();
-            $table->unsignedBigInteger('redacteur')->nullable();
+            $table->foreignId('dossier_id')
+                    ->nullable()
+                    ->constrained('dossiers')
+                    ->nullOnDelete();
 
-            $table->foreign('id_dossier')->references('id_dossier')->on('dossiers')->onDelete('cascade'); // Changed from 'Dossier'
-            $table->foreign('redacteur')->references('id_utilisateur')->on('utilisateurs')->onDelete('set null'); // Changed from 'Utilisateur'
+            $table->foreignId('redacteur_id')
+                    ->nullable()
+                    ->constrained('users')
+                    ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

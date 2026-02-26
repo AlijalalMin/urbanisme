@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('piece_jointes', function (Blueprint $table) {
-            $table->id('id_pj');
+            $table->id();
             $table->string('nom_fichier')->nullable();
             $table->string('type_mime')->nullable();
             $table->bigInteger('taille_fichier')->nullable();
@@ -20,11 +20,14 @@ return new class extends Migration
             $table->string('chemin_stockage')->nullable();
             $table->timestamp('date_ajout')->nullable();
 
-            $table->unsignedBigInteger('id_dossier')->nullable();
-            $table->unsignedBigInteger('id_pv')->nullable();
-
-            $table->foreign('id_dossier')->references('id_dossier')->on('dossiers')->onDelete('cascade'); // Changed from 'Dossier'
-            $table->foreign('id_pv')->references('id_Pv')->on('pvs')->onDelete('cascade'); // Changed from 'PV'
+            $table->foreignId('dossier_id')
+                    ->nullable()
+                    ->constrained('dossiers')
+                    ->nullOnDelete();
+            $table->foreignId('pv_id')
+                    ->nullable()
+                    ->constrained('pvs')
+                    ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

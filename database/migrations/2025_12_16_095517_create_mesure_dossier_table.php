@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mesure_dossier', function (Blueprint $table) {
-            $table->id('id_mesure');
+            $table->id();
             $table->string('action')->nullable();
             $table->string('type_source')->nullable();
             $table->string('niveau_urgence')->nullable();
@@ -21,8 +21,10 @@ return new class extends Migration
             $table->text('commentaire')->nullable();
             $table->date('date_execution')->nullable();
 
-            $table->unsignedBigInteger('id_dossier')->nullable();
-            $table->foreign('id_dossier')->references('id_dossier')->on('dossiers')->onDelete('cascade'); // Changed from 'Dossier'
+            $table->foreignId('dossier_id')
+                    ->nullable()
+                    ->constrained('dossiers')
+                    ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

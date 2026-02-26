@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Urbanisme\Enums\MesureTypeEnum;
+use App\Enums\MesureTypeEnum;
 
 return new class extends Migration
 {
@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mesure_pv', function (Blueprint $table) {
-            $table->id('id_MPv');
+            $table->id();
             $table->timestamp('date_rappel')->nullable();
             $table->enum('typeMesure', MesureTypeEnum::values())->nullable();
             $table->float('cout_estimatif')->nullable();
@@ -21,8 +21,10 @@ return new class extends Migration
             $table->text('commentaire')->nullable();
             $table->text('preuve')->nullable();
 
-            $table->unsignedBigInteger('id_P')->nullable();
-            $table->foreign('id_P')->references('id_Pv')->on('pvs')->onDelete('cascade'); // Changed from 'PV'
+            $table->foreignId('pv_id')
+                    ->nullable()
+                    ->constrained('pvs')
+                    ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

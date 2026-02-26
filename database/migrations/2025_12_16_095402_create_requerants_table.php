@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Urbanisme\Enums\RequerantTypeEnum;
+use App\Enums\RequerantTypeEnum;
 
 return new class extends Migration
 {
@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('requerants', function (Blueprint $table) {
-            $table->id('id_requerant');
+            $table->id();
             $table->string('nom')->nullable();
             $table->string('cin')->nullable();
             $table->string('contact')->nullable();

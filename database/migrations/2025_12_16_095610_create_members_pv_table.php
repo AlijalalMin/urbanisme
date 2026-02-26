@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('members_pv', function (Blueprint $table) {
-            $table->id('id_mp');
+            $table->id();
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
             $table->string('role')->nullable();
 
-            $table->unsignedBigInteger('id_P')->nullable();
-            $table->foreign('id_P')->references('id_Pv')->on('pvs')->onDelete('cascade'); // Changed from 'PV'
+            $table->foreignId('pv_id')
+                    ->nullable()
+                    ->constrained('pvs')
+                    ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

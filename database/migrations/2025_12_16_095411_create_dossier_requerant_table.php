@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('dossier_requerant', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_dossier');
-            $table->unsignedBigInteger('id_requerant');
+            $table->foreignId('dossier_id')
+                    ->nullable()
+                    ->constrained('dossiers')
+                    ->nullOnDelete();
+            $table->foreignId('requerant_id')
+                    ->nullable()
+                    ->constrained('requerants')
+                    ->nullOnDelete();
 
             $table->string('role')->nullable();
             $table->text('commentaire')->nullable();
-
-            $table->foreign('id_dossier')->references('id_dossier')->on('dossiers')->onDelete('cascade'); // Changed from 'Dossier'
-            $table->foreign('id_requerant')->references('id_requerant')->on('requerants')->onDelete('cascade'); // Changed from 'Requerant'
 
             $table->timestamps();
             $table->softDeletes();

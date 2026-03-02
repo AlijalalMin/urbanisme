@@ -4,6 +4,8 @@ namespace App\Enums;
 
 enum DossierTypeEnum: string
 {
+    case PERMIS_CONSTRUIRE = 'permis_construire';
+    case LOTISSEMENT = 'lotissement';
     case PLAINTE = 'plainte';
     case SIGNALEMENT = 'signalement';
     case INFRACTION = 'infraction';

@@ -6,9 +6,8 @@ enum DossierStatutEnum: string
 {
     case NOUVEAU = 'nouveau';
     case EN_COURS = 'en_cours';
-    case TRAITE = 'traite';
-    case CLOS = 'clos';
-    case REJETE = 'rejete';
+    case CLOTURE = 'cloture';
+    case ARCHIVE = 'archive';
 
     public static function values(): array
     {

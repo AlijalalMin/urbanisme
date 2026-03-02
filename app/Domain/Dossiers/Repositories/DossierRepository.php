@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Domain\Dossiers\Repositories;
+
+use App\Domain\Dossiers\Models\Dossier;
+
+class DossierRepository implements DossierRepositoryInterface
+{
+    public function getAll(int $perPage = 20)
+    {
+        return Dossier::with('utilisateur')->latest()->paginate($perPage);
+    }
+
+    public function find(int $id): ?Dossier
+    {
+        return Dossier::find($id);
+    }
+
+    public function create(array $data): Dossier
+    {
+        return Dossier::create($data);
+    }
+
+    public function update(Dossier $dossier, array $data): Dossier
+    {
+        $dossier->update($data);
+
+        return $dossier;
+    }
+
+    public function delete(Dossier $dossier): bool
+    {
+        return $dossier->delete();
+    }
+}

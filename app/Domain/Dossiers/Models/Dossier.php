@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Domain\Dossiers\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Dossier extends Model
+{
+    use SoftDeletes;
+
+    protected $table = 'dossiers';
+
+    protected $fillable = [
+        'numero_dossier',
+        'objet',
+        'type_dossier',
+        'priorite',
+        'source_signalement',
+        'plaignant',
+        'accuse',
+        'date_arrive',
+        'statut',
+        'coordonnees_gps',
+        'adresse_complete',
+        'description_initiale',
+        'user_id',
+        'annexe_id',
+    ];
+
+    public $timestamps = true;
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function annexe()
+    {
+        return $this->belongsTo(\App\Domain\Annexes\Models\Annexe::class);
+    }
+
+    public function infractions()
+    {
+        return $this->hasMany(\App\Domain\Infractions\Models\Infraction::class, 'dossier_id');
+    }
+
+    public function requerants()
+    {
+        return $this->hasMany(\App\Domain\Requerants\Models\Requerant::class, 'dossier_id');
+    }
+
+    public function mesures()
+    {
+        return $this->hasMany(\App\Domain\Mesures\Models\MesureDossier::class, 'dossier_id');
+    }
+
+    public function reponses()
+    {
+        return $this->hasMany(\App\Domain\Reponses\Models\ReponseAutorite::class, 'dossier_id');
+    }
+}

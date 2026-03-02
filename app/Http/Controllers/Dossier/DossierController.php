@@ -12,16 +12,17 @@ use App\Http\Requests\Dossiers\StoreDossierRequest;
 use App\Http\Requests\Dossiers\UpdateDossierRequest;
 use Inertia\Inertia;
 use App\Domain\Annexes\Models\Annexe;
+use App\Domain\Dossiers\Services\DossierService;
 
 class DossierController extends Controller
 {
+    public function __construct(
+        private DossierService $dossierService
+    ) {}
     public function index()
     {
         return Inertia::render('Dossiers/Index', [
-            'dossiers' => Dossier::query()
-                ->with('user')
-                ->latest()
-                ->paginate(15),
+            'dossiers' => $this->dossierService->getAll(),
         ]);
     }
 

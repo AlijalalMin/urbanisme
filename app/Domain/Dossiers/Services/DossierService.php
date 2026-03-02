@@ -12,6 +12,11 @@ class DossierService
         protected DossierRepositoryInterface $repository
     ) {}
 
+    public function getAll(int $perPage = 20)
+    {
+        return $this->repository->getAll($perPage);
+    }
+
     public function create(DossierData $data): Dossier
     {
         return $this->repository->create($data->toArray());

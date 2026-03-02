@@ -58,6 +58,30 @@ const breadcrumbs = computed<BreadcrumbItem[]>(() => [
                         <h3 class="font-medium">Créé par</h3>
                         <p>{{ dossier.user?.name }}</p>
                     </div>
+                    <div>
+                        <h3 class="font-medium">Annexe</h3>
+                        <p>{{ dossier.annexe?.nom }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Date d'arrivée</h3>
+                        <p>{{ dossier.date_arrive }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Statut</h3>
+                        <p>{{ dossier.statut }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Plaignant</h3>
+                        <p>{{ dossier.plaignant }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Adresse complète</h3>
+                        <p>{{ dossier.adresse_complete }}</p>
+                    </div>
+                    <div>
+                        <h3 class="font-medium">Description initiale</h3>
+                        <p>{{ dossier.description_initiale }}</p>
+                    </div>
 
                 </CardContent>
             </Card>

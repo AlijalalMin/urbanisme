@@ -8,7 +8,7 @@ class DossierRepository implements DossierRepositoryInterface
 {
     public function getAll(int $perPage = 20)
     {
-        return Dossier::with('utilisateur')->latest()->paginate($perPage);
+        return Dossier::with(['user', 'annexe'])->latest()->paginate($perPage);
     }
 
     public function find(int $id): ?Dossier

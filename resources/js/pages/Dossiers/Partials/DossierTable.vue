@@ -17,16 +17,12 @@ defineProps<Props>()
         <TableHeader>
           <TableRow>
             <TableHead>Numéro</TableHead>
-            <TableHead>Objet</TableHead>
             <TableHead>Priorité</TableHead>
             <TableHead>Statut</TableHead>
             <TableHead>Plaignant</TableHead>
-            <TableHead>Accusé</TableHead>
-            <TableHead>Coordonnées GPS</TableHead>
             <TableHead>Adresse complète</TableHead>
             <TableHead>Description initiale</TableHead>
             <TableHead>Date d'arrivée</TableHead>
-            <TableHead>Utilisateur</TableHead>
             <TableHead>Annexe</TableHead>
             <TableHead class="text-right">Actions</TableHead>
           </TableRow>
@@ -38,16 +34,12 @@ defineProps<Props>()
             :key="dossier.id"
           >
             <TableCell>{{ dossier.numero_dossier }}</TableCell>
-            <TableCell>{{ dossier.objet }}</TableCell>
             <TableCell>{{ dossier.priorite }}</TableCell>
             <TableCell>{{ dossier.statut }}</TableCell>
             <TableCell>{{ dossier.plaignant }}</TableCell>
-            <TableCell>{{ dossier.accuse }}</TableCell>
-            <TableCell>{{ dossier.coordonnees_gps }}</TableCell>
             <TableCell>{{ dossier.adresse_complete }}</TableCell>
             <TableCell>{{ dossier.description_initiale }}</TableCell>
             <TableCell>{{ dossier.date_arrive }}</TableCell>
-            <TableCell>{{ dossier.user?.name }}</TableCell>
             <TableCell>{{ dossier.annexe?.nom }}</TableCell>
 
             <TableCell class="text-right">

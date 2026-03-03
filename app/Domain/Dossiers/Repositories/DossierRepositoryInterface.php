@@ -8,7 +8,7 @@ interface DossierRepositoryInterface
 {
     public function getAll(int $perPage = 20);
 
-    public function find(int $id): ?Dossier;
+    public function find(int $id);
 
     public function create(array $data): Dossier;
 

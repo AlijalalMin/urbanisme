@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Dossier;
 
-use App\Domain\Dossiers\Actions\ArchiveDossierAction;
-use App\Domain\Dossiers\Actions\CreateDossierAction;
-use App\Domain\Dossiers\Actions\UpdateDossierAction;
 use App\Domain\Dossiers\DTO\DossierData;
 use App\Domain\Dossiers\Models\Dossier;
 use App\Http\Controllers\Controller;
@@ -19,52 +16,49 @@ class DossierController extends Controller
     public function __construct(
         private DossierService $dossierService
     ) {}
+
     public function index()
     {
         return Inertia::render('Dossiers/Index', [
-            'dossiers' => $this->dossierService->getAll(),
+            'dossiers' => $this->dossierService->getPaginatedList(),
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Dossiers/Create', [
+            'annexes' => Annexe::all(),
         ]);
     }
 
     public function show(Dossier $dossier)
     {
         return Inertia::render('Dossiers/Show', [
-            'dossier' => $dossier->load(['user']),
+            'dossier' => $this->dossierService->showDossier($dossier->id),
         ]);
     }
 
-    public function create()
+    public function store(StoreDossierRequest $request)
     {
-        $annexes = Annexe::all();
-        return Inertia::render('Dossiers/Create', [
-            'annexes' => $annexes,
-        ]);
-    }
+        // 1. Transform Request to DTO
+        $dto = DossierData::fromRequest($request);
 
-    public function store(StoreDossierRequest $request, CreateDossierAction $action)
-    {
-        $validated = $request->validated();
-
-        // Map id_utilisateur to user_id for the DTO
-        $validated['user_id'] = $validated['id_utilisateur'];
-        unset($validated['id_utilisateur']);
-
-        $data = new DossierData(...$validated);
-        $action->handle($data);
+        // 2. Delegate to Service
+        $this->dossierService->createDossier($dto);
 
         return redirect()->route('dossiers.index')->with('success', 'Dossier créé');
     }
 
-    public function update(UpdateDossierRequest $request, Dossier $dossier, UpdateDossierAction $action)
+    public function update(UpdateDossierRequest $request, Dossier $dossier)
     {
-        $action->handle($dossier, $request->validated());
+        $this->dossierService->updateDossier($dossier, $request->validated());
 
         return redirect()->back()->with('success', 'Dossier mis à jour');
     }
 
-    public function destroy(Dossier $dossier, ArchiveDossierAction $action)
+    public function destroy(Dossier $dossier)
     {
-        $action->handle($dossier);
+        $this->dossierService->archiveDossier($dossier);
 
         return redirect()->route('dossiers.index')->with('success', 'Dossier archivé');
     }

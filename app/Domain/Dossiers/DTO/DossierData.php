@@ -2,6 +2,8 @@
 
 namespace App\Domain\Dossiers\DTO;
 
+use App\Http\Requests\Dossiers\StoreDossierRequest;
+
 class DossierData
 {
     public function __construct(
@@ -20,6 +22,26 @@ class DossierData
         public int $user_id,
         public ?int $annexe_id
     ) {}
+
+    public static function fromRequest(StoreDossierRequest $request): self
+    {
+        return new self(
+            numero_dossier: $request->numero_dossier,
+            objet: $request->objet,
+            type_dossier: $request->type_dossier,
+            priorite: $request->priorite,
+            source_signalement: $request->source_signalement,
+            statut: $request->statut,
+            plaignant: $request->plaignant,
+            accuse: $request->accuse,
+            coordonnees_gps: $request->coordonnees_gps,
+            adresse_complete: $request->adresse_complete,
+            description_initiale: $request->description_initiale,
+            date_arrive: $request->date_arrive,
+            user_id: $request->user_id,
+            annexe_id: $request->annexe_id,
+        );
+    }
 
     public function toArray(): array
     {

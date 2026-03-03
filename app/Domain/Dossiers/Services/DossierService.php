@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domain\Dossiers\Services;
 
 use App\Domain\Dossiers\DTO\DossierData;
@@ -12,22 +11,28 @@ class DossierService
         protected DossierRepositoryInterface $repository
     ) {}
 
-    public function getAll(int $perPage = 20)
+    public function getPaginatedList(int $perPage = 20)
     {
         return $this->repository->getAll($perPage);
     }
 
-    public function create(DossierData $data): Dossier
+    public function createDossier(DossierData $data): Dossier
     {
+        // If you had to send an email or log an event, it happens here.
         return $this->repository->create($data->toArray());
     }
 
-    public function update(Dossier $dossier, array $data): Dossier
+    public function showDossier(int $id)
+    {
+        return $this->repository->find($id);
+    }
+
+    public function updateDossier(Dossier $dossier, array $data): Dossier
     {
         return $this->repository->update($dossier, $data);
     }
 
-    public function archive(Dossier $dossier): bool
+    public function archiveDossier(Dossier $dossier): bool
     {
         return $this->repository->delete($dossier);
     }

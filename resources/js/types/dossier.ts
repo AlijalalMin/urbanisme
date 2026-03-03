@@ -40,6 +40,6 @@ export interface DossierFormData {
     adresse_complete: string | null
     description_initiale: string | null
     date_arrive: string
-    id_utilisateur: number | null
+    user_id: number | null
     statut: string
 }

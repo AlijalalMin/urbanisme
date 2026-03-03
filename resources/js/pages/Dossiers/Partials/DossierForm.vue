@@ -23,7 +23,7 @@ const defaultData: DossierFormData = {
     adresse_complete: '',
     description_initiale: '',
     date_arrive: new Date().toISOString().split('T')[0],
-    id_utilisateur: userId,
+    user_id: userId,
     statut: 'nouveau',
 };
 </script>
@@ -45,7 +45,7 @@ const defaultData: DossierFormData = {
                 <div v-if="errors.numero_dossier" class="text-red-500 text-sm">{{ errors.numero_dossier }}</div>
             </div>
 
-            <input type="hidden" name="id_utilisateur" :value="userId" />
+            <input type="hidden" name="user_id" :value="userId" />
             <div class="space-y-2">
                 <Label for="annexe_id">Annexe</Label>
                 <select

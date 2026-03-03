@@ -21,7 +21,7 @@ class StoreDossierRequest extends FormRequest
             'adresse_complete' => 'nullable|string',
             'description_initiale' => 'nullable|string',
             'date_arrive' => 'required|date',
-            'id_utilisateur' => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:users,id',
             'annexe_id' => 'nullable|integer|exists:annexes,id',
         ];
     }

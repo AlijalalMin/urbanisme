@@ -9,7 +9,7 @@ class StoreDossierRequest extends FormRequest
     public function rules()
     {
         return [
-            'numero_dossier' => 'required|string',
+            'numero_dossier' => 'required|string|unique:dossiers,numero_dossier',
             'objet' => 'required|string',
             'type_dossier' => 'required|string',
             'priorite' => 'required|string',

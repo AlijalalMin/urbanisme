@@ -26,11 +26,12 @@ const breadcrumbs: BreadcrumbItem[] = [
     <Head title="Nouveau dossier" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-xl font-semibold mb-6">Informations du dossier</h2>
-                <DossierForm />
+        <div class="min-h-full bg-muted/40 dark:bg-background px-4 py-8 sm:px-6 lg:px-10">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold tracking-tight text-foreground">Nouveau dossier</h1>
+                <p class="mt-1 text-sm text-muted-foreground">Remplissez les informations du dossier pour le créer dans le système.</p>
             </div>
+            <DossierForm />
         </div>
     </AppLayout>
 </template>

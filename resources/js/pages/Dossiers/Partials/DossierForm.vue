@@ -48,13 +48,13 @@ const defaultData: DossierFormData = {
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-6">
                         <div class="space-y-1.5">
-                            <Label for="numero_dossier" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Numéro de dossier</Label>
+                            <Label for="numero_dossier" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Numéro de dossier <span class="text-destructive text-xl mt-1">*</span></Label>
                             <Input id="numero_dossier" name="numero_dossier" placeholder="Ex: D-2024-001" required class="bg-background border-primary/30 focus-visible:ring-primary" />
                             <div v-if="errors.numero_dossier" class="text-destructive text-xs mt-1">{{ errors.numero_dossier }}</div>
                         </div>
 
                         <div class="space-y-1.5">
-                            <Label for="annexe_id" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Annexe</Label>
+                            <Label for="annexe_id" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Annexe <span class="text-destructive text-xl mt-1">*</span></Label>
                             <select
                                 id="annexe_id"
                                 name="annexe_id"
@@ -68,13 +68,13 @@ const defaultData: DossierFormData = {
                         </div>
 
                         <div class="space-y-1.5">
-                            <Label for="date_arrive" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Date d'arrivée</Label>
+                            <Label for="date_arrive" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Date d'arrivée <span class="text-destructive text-xl mt-1">*</span></Label>
                             <Input id="date_arrive" name="date_arrive" type="date" required class="bg-background border-primary/30 focus-visible:ring-primary" />
                             <div v-if="errors.date_arrive" class="text-destructive text-xs mt-1">{{ errors.date_arrive }}</div>
                         </div>
 
                         <div class="space-y-1.5">
-                            <Label for="type_dossier" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Type de dossier</Label>
+                            <Label for="type_dossier" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Type de dossier <span class="text-destructive text-xl mt-1">*</span></Label>
                             <select
                                 id="type_dossier"
                                 name="type_dossier"
@@ -91,13 +91,13 @@ const defaultData: DossierFormData = {
                         </div>
 
                         <div class="space-y-1.5 md:col-span-2">
-                            <Label for="objet" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Objet</Label>
+                            <Label for="objet" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Objet <span class="text-destructive text-xl mt-1">*</span></Label>
                             <Input id="objet" name="objet" placeholder="Objet du dossier" required class="bg-background border-primary/30 focus-visible:ring-primary" />
                             <div v-if="errors.objet" class="text-destructive text-xs mt-1">{{ errors.objet }}</div>
                         </div>
 
                         <div class="space-y-1.5">
-                            <Label for="priorite" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Priorité</Label>
+                            <Label for="priorite" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Priorité <span class="text-destructive text-xl mt-1">*</span></Label>
                             <select
                                 id="priorite"
                                 name="priorite"
@@ -124,7 +124,7 @@ const defaultData: DossierFormData = {
                     </div>
                     <div class="space-y-5 p-6">
                         <div class="space-y-1.5">
-                            <Label for="source_signalement" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Source du signalement</Label>
+                            <Label for="source_signalement" class="text-xs font-medium text-muted-foreground uppercase tracking-wide">Source du signalement <span class="text-destructive text-xl mt-1">*</span></Label>
                             <Input id="source_signalement" name="source_signalement" placeholder="Ex: Courrier, Visite…" required class="bg-background border-primary/30 focus-visible:ring-primary" />
                             <div v-if="errors.source_signalement" class="text-destructive text-xs mt-1">{{ errors.source_signalement }}</div>
                         </div>

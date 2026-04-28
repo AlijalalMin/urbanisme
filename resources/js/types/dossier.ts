@@ -20,7 +20,13 @@ export interface Dossier {
     updated_at: string
     user_id: number
     annexe_id?: number | null
+    district_id?: number | null
     annexe?: {
+        id: number
+        nom: string
+        district_id?: number
+    }
+    district?: {
         id: number
         nom: string
     }
@@ -44,5 +50,7 @@ export interface DossierFormData {
     description_initiale: string | null
     date_arrive: string
     user_id: number | null
+    annexe_id: number | null
+    district_id: number | null
     statut: string
 }

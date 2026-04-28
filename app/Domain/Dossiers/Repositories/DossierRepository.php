@@ -8,7 +8,7 @@ class DossierRepository implements DossierRepositoryInterface
 {
     public function getAll(int $perPage = 20, array $filters = [])
     {
-        $query = Dossier::with(['user', 'annexe'])->latest();
+        $query = Dossier::with(['user', 'annexe', 'district'])->latest();
 
         if (! empty($filters['search'])) {
             $search = $filters['search'];
@@ -29,7 +29,7 @@ class DossierRepository implements DossierRepositoryInterface
 
     public function find(int $id)
     {
-        return Dossier::with(['user', 'annexe', 'infractions'])->find($id);
+        return Dossier::with(['user', 'annexe', 'district', 'infractions'])->find($id);
     }
 
     public function create(array $data): Dossier

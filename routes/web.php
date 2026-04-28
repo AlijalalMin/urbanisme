@@ -13,7 +13,29 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', [
+            'stats' => [
+                'total_dossiers' => \App\Domain\Dossiers\Models\Dossier::count(),
+                'total_infractions' => \App\Domain\Infractions\Models\Infraction::count(),
+                'recent_activities' => [
+                    // Combining recent dossiers and infractions for a unified timeline
+                    ...(\App\Domain\Dossiers\Models\Dossier::latest()->take(5)->get()->map(fn($d) => [
+                        'type' => 'dossier',
+                        'title' => "Nouveau dossier: {$d->numero_dossier}",
+                        'description' => $d->objet,
+                        'time' => $d->created_at->diffForHumans(),
+                        'id' => $d->id
+                    ])),
+                    ...(\App\Domain\Infractions\Models\Infraction::latest()->take(5)->get()->map(fn($i) => [
+                        'type' => 'infraction',
+                        'title' => "Nouvelle infraction: {$i->numero_infraction}",
+                        'description' => $i->statut_infraction,
+                        'time' => $i->created_at->diffForHumans(),
+                        'id' => $i->id
+                    ])),
+                ]
+            ]
+        ]);
     })->name('dashboard');
 
     Route::prefix('dossiers')->group(function () {

@@ -30,7 +30,8 @@ class DossierController extends Controller
     public function create()
     {
         return Inertia::render('Dossiers/Create', [
-            'annexes' => Annexe::all(),
+            'annexes' => Annexe::with('district')->get(),
+            'districts' => \App\Domain\Districts\Models\District::all(),
         ]);
     }
 
@@ -38,7 +39,8 @@ class DossierController extends Controller
     {
         return Inertia::render('Dossiers/Edit', [
             'dossier' => $this->dossierService->showDossier($dossier->id),
-            'annexes' => Annexe::all(),
+            'annexes' => Annexe::with('district')->get(),
+            'districts' => \App\Domain\Districts\Models\District::all(),
         ]);
     }
 

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nom')->nullable();
             $table->foreignId('district_id')
-                    ->nullable()
-                    ->constrained('districts')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('districts')
+                ->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

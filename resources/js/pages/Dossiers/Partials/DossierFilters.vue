@@ -3,14 +3,21 @@ import { Input } from '@/components/ui/input';
 import { router } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 
-const search = ref('');
-const status = ref('');
+const props = defineProps<{
+    initialFilters?: {
+        search?: string;
+        status?: string;
+    };
+}>();
+
+const search = ref(props.initialFilters?.search ?? '');
+const status = ref(props.initialFilters?.status ?? '');
 
 watch([search, status], () => {
     router.get(
         '/dossiers',
         { search: search.value, status: status.value },
-        { preserveState: true, replace: true },
+        { preserveState: true, replace: true, preserveScroll: true },
     );
 });
 </script>

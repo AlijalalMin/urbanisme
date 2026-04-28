@@ -5,33 +5,40 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { usePage } from '@inertiajs/vue3';
 import { type DossierFormData } from '@/types/dossier';
-import { index as dossiersIndex, store as dossiersStore } from '@/routes/dossiers';
+import { index as dossiersIndex, store as dossiersStore, update as dossiersUpdate } from '@/routes/dossiers';
+import type { Dossier } from '@/types/dossier';
+
+const props = defineProps<{
+    dossier?: Dossier;
+}>();
 
 const page = usePage();
 const userId = (page.props.auth as any).user.id;
 const annexes = (page.props.annexes as any);
 
+const isEditing = !!props.dossier;
+
 const defaultData: DossierFormData = {
-    numero_dossier: '',
-    objet: '',
-    type_dossier: '',
-    priorite: 'normale',
-    source_signalement: '',
-    plaignant: '',
-    accuse: '',
-    coordonnees_gps: '',
-    adresse_complete: '',
-    description_initiale: '',
-    date_arrive: new Date().toISOString().split('T')[0],
-    user_id: userId,
-    statut: 'nouveau',
+    numero_dossier: props.dossier?.numero_dossier ?? '',
+    objet: props.dossier?.objet ?? '',
+    type_dossier: props.dossier?.type_dossier ?? '',
+    priorite: props.dossier?.priorite ?? 'normale',
+    source_signalement: props.dossier?.source_signalement ?? '',
+    plaignant: props.dossier?.plaignant ?? '',
+    accuse: props.dossier?.accuse ?? '',
+    coordonnees_gps: props.dossier?.coordonnees_gps ?? '',
+    adresse_complete: props.dossier?.adresse_complete ?? '',
+    description_initiale: props.dossier?.description_initiale ?? '',
+    date_arrive: props.dossier?.date_arrive ?? new Date().toISOString().split('T')[0],
+    user_id: props.dossier?.user_id ?? userId,
+    statut: props.dossier?.statut ?? 'nouveau',
 };
 </script>
 
 <template>
     <Form
-        :action="dossiersStore().url"
-        method="post"
+        :action="isEditing && dossier ? dossiersUpdate(dossier).url : dossiersStore().url"
+        :method="isEditing ? 'put' : 'post'"
         :defaults="defaultData"
         #default="{
             errors,
@@ -190,7 +197,7 @@ const defaultData: DossierFormData = {
                         </svg>
                         Enregistrement…
                     </span>
-                    <span v-else>Créer le dossier</span>
+                    <span v-else>{{ isEditing ? 'Mettre à jour' : 'Créer le dossier' }}</span>
                 </Button>
             </div>
         </div>

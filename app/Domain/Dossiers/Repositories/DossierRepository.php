@@ -6,14 +6,30 @@ use App\Domain\Dossiers\Models\Dossier;
 
 class DossierRepository implements DossierRepositoryInterface
 {
-    public function getAll(int $perPage = 20)
+    public function getAll(int $perPage = 20, array $filters = [])
     {
-        return Dossier::with(['user', 'annexe'])->latest()->paginate($perPage);
+        $query = Dossier::with(['user', 'annexe'])->latest();
+
+        if (! empty($filters['search'])) {
+            $search = $filters['search'];
+            $query->where(function ($q) use ($search) {
+                $q->where('numero_dossier', 'like', "%{$search}%")
+                    ->orWhere('objet', 'like', "%{$search}%")
+                    ->orWhere('description_initiale', 'like', "%{$search}%")
+                    ->orWhere('plaignant', 'like', "%{$search}%");
+            });
+        }
+
+        if (! empty($filters['status'])) {
+            $query->where('statut', $filters['status']);
+        }
+
+        return $query->paginate($perPage);
     }
 
     public function find(int $id)
     {
-        return Dossier::with(['user', 'annexe'])->find($id);
+        return Dossier::with(['user', 'annexe', 'infractions'])->find($id);
     }
 
     public function create(array $data): Dossier

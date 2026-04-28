@@ -21,13 +21,13 @@ return new class extends Migration
             $table->timestamp('date_ajout')->nullable();
 
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
             $table->foreignId('pv_id')
-                    ->nullable()
-                    ->constrained('pvs')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('pvs')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

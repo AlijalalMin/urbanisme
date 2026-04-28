@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domain\Dossiers\Services;
 
 use App\Domain\Dossiers\DTO\DossierData;
@@ -11,9 +12,9 @@ class DossierService
         protected DossierRepositoryInterface $repository
     ) {}
 
-    public function getPaginatedList(int $perPage = 20)
+    public function getPaginatedList(array $filters = [], int $perPage = 20)
     {
-        return $this->repository->getAll($perPage);
+        return $this->repository->getAll($perPage, $filters);
     }
 
     public function createDossier(DossierData $data): Dossier

@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('dossier_auteur', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
             $table->foreignId('auteur_id')
-                    ->nullable()
-                    ->constrained('auteur_infractions')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('auteur_infractions')
+                ->nullOnDelete();
 
             $table->string('role_auteur')->nullable();
             $table->text('commentaire')->nullable();

@@ -1,3 +1,5 @@
+import type { Infraction } from './infraction'
+
 export type DossierPriority = 'faible' | 'normale' | 'haute'
 
 export interface Dossier {
@@ -26,6 +28,7 @@ export interface Dossier {
         id: number
         name: string
     }
+    infractions?: Infraction[]
 }
 
 export interface DossierFormData {

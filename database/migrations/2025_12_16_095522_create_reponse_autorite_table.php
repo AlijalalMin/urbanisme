@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('fichier_pv')->nullable();
 
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

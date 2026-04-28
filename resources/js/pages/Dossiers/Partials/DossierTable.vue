@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Dossier } from '@/types/dossier'
 import DossierActions from './DossierActions.vue'
+import { Card, CardContent } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 interface Props {
@@ -33,16 +34,16 @@ defineProps<Props>()
             v-for="dossier in dossiers"
             :key="dossier.id"
           >
-            <TableCell>{{ dossier.numero_dossier }}</TableCell>
-            <TableCell>{{ dossier.priorite }}</TableCell>
-            <TableCell>{{ dossier.statut }}</TableCell>
-            <TableCell>{{ dossier.plaignant }}</TableCell>
-            <TableCell>{{ dossier.adresse_complete }}</TableCell>
-            <TableCell>{{ dossier.description_initiale }}</TableCell>
-            <TableCell>{{ dossier.date_arrive }}</TableCell>
-            <TableCell>{{ dossier.annexe?.nom }}</TableCell>
+            <TableCell class="align-top font-medium whitespace-nowrap">{{ dossier.numero_dossier }}</TableCell>
+            <TableCell class="align-top">{{ dossier.priorite }}</TableCell>
+            <TableCell class="align-top">{{ dossier.statut }}</TableCell>
+            <TableCell class="align-top whitespace-nowrap">{{ dossier.plaignant }}</TableCell>
+            <TableCell class="align-top max-w-[150px] truncate" :title="dossier.adresse_complete || ''">{{ dossier.adresse_complete }}</TableCell>
+            <TableCell class="align-top max-w-[250px] truncate" :title="dossier.description_initiale || ''">{{ dossier.description_initiale }}</TableCell>
+            <TableCell class="align-top whitespace-nowrap">{{ dossier.date_arrive }}</TableCell>
+            <TableCell class="align-top whitespace-nowrap">{{ dossier.annexe?.nom }}</TableCell>
 
-            <TableCell class="text-right">
+            <TableCell class="align-top text-right">
               <DossierActions :dossier="dossier" />
             </TableCell>
           </TableRow>

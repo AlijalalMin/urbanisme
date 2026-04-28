@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\InfractionStatutEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\InfractionStatutEnum;
 
 return new class extends Migration
 {
@@ -21,9 +21,9 @@ return new class extends Migration
             $table->enum('statut_infraction', InfractionStatutEnum::values())->nullable();
 
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

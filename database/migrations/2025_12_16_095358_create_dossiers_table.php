@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use App\Enums\DossierSourceEnum;
 use App\Enums\DossierStatutEnum;
 use App\Enums\DossierTypeEnum;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('objet')->nullable();
 
             $table->enum('type_dossier', DossierTypeEnum::values())->nullable();
-            $table->enum('priorite', ['basse','moyenne','haute'])->nullable();
+            $table->enum('priorite', ['basse', 'moyenne', 'haute'])->nullable();
 
             $table->enum('source_signalement', DossierSourceEnum::values())->nullable();
 
@@ -32,13 +32,13 @@ return new class extends Migration
             $table->text('description_initiale')->nullable();
 
             $table->foreignId('user_id')
-                    ->nullable()
-                    ->constrained()
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->foreignId('annexe_id')
-                    ->nullable()
-                    ->constrained('annexes')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('annexes')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

@@ -2,12 +2,13 @@
 
 namespace App\Domain\Districts\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Domain\Annexes\Models\Annexe;
+use Illuminate\Database\Eloquent\Model;
 
 class District extends Model
 {
     protected $table = 'districts';
+
     protected $fillable = [
         'nom',
         'code_district',

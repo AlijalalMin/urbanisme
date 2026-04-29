@@ -25,6 +25,7 @@ export interface Dossier {
         id: number
         nom: string
         district_id?: number
+        district?: District
     }
     district?: {
         id: number
@@ -36,6 +37,7 @@ export interface Dossier {
     }
     requerants?: Requerant[]
     auteurs?: Auteur[]
+    infractions?: Infraction[]
 }
 
 export interface Requerant {
@@ -75,14 +77,19 @@ export interface DossierFormData {
     type_dossier: string
     priorite: DossierPriority
     source_signalement: string
-    plaignant: string | null
-    accuse: string | null
-    coordonnees_gps: string | null
-    adresse_complete: string | null
-    description_initiale: string | null
+    plaignant: string
+    accuse: string
+    coordonnees_gps: string
+    adresse_complete: string
+    description_initiale: string
     date_arrive: string
     user_id: number | null
     annexe_id: number | null
     district_id: number | null
     statut: string
+}
+
+export interface District {
+    id: number
+    nom: string
 }

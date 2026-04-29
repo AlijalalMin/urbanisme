@@ -32,12 +32,13 @@ class DossierController extends Controller
     {
         $dossier = null;
         if ($request->has('dossier_id')) {
-            $dossier = Dossier::with(['requerants', 'auteurs'])->find($request->dossier_id);
+            $dossier = $this->dossierService->showDossier($request->dossier_id);
         }
 
         return Inertia::render('Dossiers/Create', [
             'annexes' => Annexe::with('district')->get(),
             'districts' => \App\Domain\Districts\Models\District::all(),
+            'dossier' => $dossier,
         ]);
     }
 

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import RequerantForm from '@/pages/Requerants/components/RequerantForm.vue';
+import AuteurForm from '@/pages/Auteurs/components/AuteurForm.vue';
 import { dashboard } from '@/routes';
 import { index as dossiersIndex, edit as dossierEdit } from '@/routes/dossiers';
 import { create as infractionCreate, show as infractionShow } from '@/routes/infractions';
@@ -19,7 +23,8 @@ import {
     Edit, 
     ArrowLeft,
     Tag,
-    Building
+    Building,
+    ShieldAlertIcon
 } from 'lucide-vue-next';
 
 interface Props {
@@ -146,6 +151,78 @@ const statusStyles = (status: string) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Requerants & Auteurs Sections -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Requerants Section -->
+                        <Card class="shadow-sm border border-slate-200 dark:bg-slate-900/60 dark:border-slate-800 rounded-3xl overflow-hidden">
+                            <CardHeader class="flex flex-row items-center justify-between pb-4 space-y-0 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+                                <CardTitle class="text-lg font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                                    <User class="h-5 w-5 text-blue-500" />
+                                    Requérants
+                                </CardTitle>
+                                <RequerantForm :dossier-id="dossier.id" />
+                            </CardHeader>
+                            <CardContent class="pt-6">
+                                <Table v-if="dossier.requerants?.length">
+                                    <TableHeader>
+                                        <TableRow class="hover:bg-transparent border-slate-100 dark:border-slate-800">
+                                            <TableHead class="text-xs font-bold text-slate-400 uppercase tracking-wider">Nom</TableHead>
+                                            <TableHead class="text-xs font-bold text-slate-400 uppercase tracking-wider">Type</TableHead>
+                                            <TableHead class="text-xs font-bold text-slate-400 uppercase tracking-wider">Contact</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        <TableRow v-for="requerant in dossier.requerants" :key="requerant.id" class="border-slate-50 dark:border-slate-800/50">
+                                            <TableCell class="font-medium text-slate-900 dark:text-slate-200">{{ requerant.nom }}</TableCell>
+                                            <TableCell class="text-slate-600 dark:text-slate-400 capitalize text-sm">{{ requerant.type_requerant }}</TableCell>
+                                            <TableCell class="text-slate-600 dark:text-slate-400 text-sm">{{ requerant.contact }}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                                <div v-else class="text-center py-10 px-4 rounded-2xl bg-slate-50/30 border border-dashed border-slate-200 dark:bg-slate-800/20 dark:border-slate-700">
+                                    <p class="text-sm text-slate-500 italic">Aucun requérant enregistré.</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <!-- Auteurs Section -->
+                        <Card class="shadow-sm border border-slate-200 dark:bg-slate-900/60 dark:border-slate-800 rounded-3xl overflow-hidden">
+                            <CardHeader class="flex flex-row items-center justify-between pb-4 space-y-0 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+                                <CardTitle class="text-lg font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                                    <ShieldAlertIcon class="h-5 w-5 text-red-500" />
+                                    Auteurs
+                                </CardTitle>
+                                <AuteurForm :dossier-id="dossier.id" />
+                            </CardHeader>
+                            <CardContent class="pt-6">
+                                <Table v-if="dossier.auteurs?.length">
+                                    <TableHeader>
+                                        <TableRow class="hover:bg-transparent border-slate-100 dark:border-slate-800">
+                                            <TableHead class="text-xs font-bold text-slate-400 uppercase tracking-wider">Nom</TableHead>
+                                            <TableHead class="text-xs font-bold text-slate-400 uppercase tracking-wider">Statut</TableHead>
+                                            <TableHead class="text-xs font-bold text-slate-400 uppercase tracking-wider">Téléphone</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        <TableRow v-for="auteur in dossier.auteurs" :key="auteur.id" class="border-slate-50 dark:border-slate-800/50">
+                                            <TableCell class="font-medium text-slate-900 dark:text-slate-200">
+                                                {{ auteur.nom }} {{ auteur.prenom }}
+                                                <div v-if="auteur.raison_sociale" class="text-[10px] text-slate-400 mt-0.5">
+                                                    {{ auteur.raison_sociale }}
+                                                </div>
+                                            </TableCell>
+                                            <TableCell class="text-slate-600 dark:text-slate-400 capitalize text-sm">{{ auteur.statut_professionnel }}</TableCell>
+                                            <TableCell class="text-slate-600 dark:text-slate-400 text-sm">{{ auteur.telephone }}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                                <div v-else class="text-center py-10 px-4 rounded-2xl bg-slate-50/30 border border-dashed border-slate-200 dark:bg-slate-800/20 dark:border-slate-700">
+                                    <p class="text-sm text-slate-500 italic">Aucun auteur identifié.</p>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </div>
                 </div>
 

@@ -48,6 +48,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/store', [DossierController::class, 'store'])->name('dossiers.store');
         Route::put('/{dossier}', [DossierController::class, 'update'])->name('dossiers.update');
         Route::delete('/{dossier}', [DossierController::class, 'destroy'])->name('dossiers.destroy');
+
+        // Petitioner and Infraction Author registration routes
+        Route::post('/{dossier}/requerants', [RequerantController::class, 'store'])->name('requerants.store');
+        Route::post('/{dossier}/auteurs', [AuteurController::class, 'store'])->name('auteurs.store');
     });
 
     Route::prefix('infractions')->group(function () {

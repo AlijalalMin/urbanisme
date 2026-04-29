@@ -2,7 +2,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
-import DossierForm from './Partials/DossierForm.vue';
+import DossierForm from './components/DossierForm.vue';
 import { index as dossiersIndex } from '@/routes/dossiers';
 import { dashboard } from '@/routes';
 import type { Dossier } from '@/types/dossier';

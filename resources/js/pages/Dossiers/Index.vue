@@ -6,8 +6,8 @@ import { index as dossiersIndex, create as dossiersCreate } from '@/routes/dossi
 import { type BreadcrumbItem } from '@/types';
 import type { Dossier } from '@/types/dossier';
 import { Head, Link } from '@inertiajs/vue3';
-import DossierFilters from './Partials/DossierFilters.vue';
-import DossierTable from './Partials/DossierTable.vue';
+import DossierFilters from './components/DossierFilters.vue';
+import DossierTable from './components/DossierTable.vue';
 
 interface Props {
     dossiers?: {

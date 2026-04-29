@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dossier\DossierController;
+use App\Http\Controllers\Requerant\RequerantController;
+use App\Http\Controllers\Auteur\AuteurController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -22,6 +24,12 @@ Route::prefix('dossiers')->group(function () {
     Route::post('/store', [DossierController::class, 'store'])->name('dossiers.store');
     Route::put('/{dossier}', [DossierController::class, 'update'])->name('dossiers.update');
     Route::delete('/{dossier}', [DossierController::class, 'destroy'])->name('dossiers.destroy');
+
+    // Requérants
+    Route::post('/{dossier}/requerants', [RequerantController::class, 'store'])->name('requerants.store');
+
+    // Auteurs
+    Route::post('/{dossier}/auteurs', [AuteurController::class, 'store'])->name('auteurs.store');
 });
 
 require __DIR__.'/settings.php';

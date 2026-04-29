@@ -26,6 +26,39 @@ export interface Dossier {
         id: number
         name: string
     }
+    requerants?: Requerant[]
+    auteurs?: Auteur[]
+}
+
+export interface Requerant {
+    id: number
+    nom: string
+    cin?: string | null
+    contact?: string | null
+    adresse?: string | null
+    type_requerant?: string | null
+    ice?: string | null
+    pivot?: {
+        role?: string
+        commentaire?: string
+    }
+}
+
+export interface Auteur {
+    id: number
+    nom: string
+    prenom?: string | null
+    cin?: string | null
+    statut_professionnel?: string | null
+    telephone?: string | null
+    adresse?: string | null
+    ville?: string | null
+    raison_sociale?: string | null
+    ice?: string | null
+    pivot?: {
+        role_auteur?: string
+        commentaire?: string
+    }
 }
 
 export interface DossierFormData {

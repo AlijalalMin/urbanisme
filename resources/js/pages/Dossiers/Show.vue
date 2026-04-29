@@ -8,6 +8,10 @@ import { type BreadcrumbItem } from '@/types';
 import type { Dossier } from '@/types/dossier';
 import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import RequerantForm from '@/pages/Requerants/components/RequerantForm.vue';
+import AuteurForm from '@/pages/Auteurs/components/AuteurForm.vue';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { UserIcon, ShieldAlertIcon } from 'lucide-vue-next';
 
 interface Props {
     dossier: Dossier
@@ -94,6 +98,77 @@ const statusColor = (status: string): BadgeVariants['variant'] => {
                     </div>
                 </CardContent>
             </Card>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Requerants Section -->
+                <Card class="shadow-sm border border-gray-200">
+                    <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
+                        <CardTitle class="text-lg font-semibold flex items-center gap-2">
+                            <UserIcon class="h-5 w-5 text-blue-500" />
+                            Requérants
+                        </CardTitle>
+                        <RequerantForm :dossier-id="dossier.id" />
+                    </CardHeader>
+                    <CardContent>
+                        <Table v-if="dossier.requerants?.length">
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Nom</TableHead>
+                                    <TableHead>Type</TableHead>
+                                    <TableHead>Contact</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                <TableRow v-for="requerant in dossier.requerants" :key="requerant.id">
+                                    <TableCell class="font-medium">{{ requerant.nom }}</TableCell>
+                                    <TableCell>{{ requerant.type_requerant }}</TableCell>
+                                    <TableCell>{{ requerant.contact }}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                        <div v-else class="text-center py-6 text-muted-foreground italic">
+                            Aucun requérant enregistré.
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <!-- Auteurs Section -->
+                <Card class="shadow-sm border border-gray-200">
+                    <CardHeader class="flex flex-row items-center justify-between pb-2 space-y-0">
+                        <CardTitle class="text-lg font-semibold flex items-center gap-2">
+                            <ShieldAlertIcon class="h-5 w-5 text-red-500" />
+                            Auteurs de l'Infraction
+                        </CardTitle>
+                        <AuteurForm :dossier-id="dossier.id" />
+                    </CardHeader>
+                    <CardContent>
+                        <Table v-if="dossier.auteurs?.length">
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Nom</TableHead>
+                                    <TableHead>Statut</TableHead>
+                                    <TableHead>Téléphone</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                <TableRow v-for="auteur in dossier.auteurs" :key="auteur.id">
+                                    <TableCell class="font-medium">
+                                        {{ auteur.nom }} {{ auteur.prenom }}
+                                        <div v-if="auteur.raison_sociale" class="text-xs text-muted-foreground">
+                                            {{ auteur.raison_sociale }}
+                                        </div>
+                                    </TableCell>
+                                    <TableCell>{{ auteur.statut_professionnel }}</TableCell>
+                                    <TableCell>{{ auteur.telephone }}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                        <div v-else class="text-center py-6 text-muted-foreground italic">
+                            Aucun auteur identifié.
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     </AppLayout>
 </template>

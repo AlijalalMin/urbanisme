@@ -47,7 +47,16 @@ class Dossier extends Model
 
     public function requerants()
     {
-        return $this->hasMany(\App\Domain\Requerants\Models\Requerant::class, 'dossier_id');
+        return $this->belongsToMany(\App\Domain\Requerants\Models\Requerant::class, 'dossier_requerant')
+            ->withPivot(['role', 'commentaire'])
+            ->withTimestamps();
+    }
+
+    public function auteurs()
+    {
+        return $this->belongsToMany(\App\Domain\Auteurs\Models\AuteurInfraction::class, 'dossier_auteur', 'dossier_id', 'auteur_id')
+            ->withPivot(['role_auteur', 'commentaire'])
+            ->withTimestamps();
     }
 
     public function mesures()

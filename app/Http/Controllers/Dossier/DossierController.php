@@ -7,6 +7,7 @@ use App\Domain\Dossiers\Models\Dossier;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dossiers\StoreDossierRequest;
 use App\Http\Requests\Dossiers\UpdateDossierRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Domain\Annexes\Models\Annexe;
 use App\Domain\Dossiers\Services\DossierService;
@@ -24,10 +25,16 @@ class DossierController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $dossier = null;
+        if ($request->has('dossier_id')) {
+            $dossier = Dossier::with(['requerants', 'auteurs'])->find($request->dossier_id);
+        }
+
         return Inertia::render('Dossiers/Create', [
             'annexes' => Annexe::all(),
+            'dossier' => $dossier,
         ]);
     }
 
@@ -44,9 +51,12 @@ class DossierController extends Controller
         $dto = DossierData::fromRequest($request);
 
         // 2. Delegate to Service
-        $this->dossierService->createDossier($dto);
+        $dossier = $this->dossierService->createDossier($dto);
 
-        return redirect()->route('dossiers.index')->with('success', 'Dossier créé');
+        return redirect()->route('dossiers.create', ['dossier_id' => $dossier->id])->with([
+            'success' => 'Dossier créé avec succès',
+            'dossier' => $dossier
+        ]);
     }
 
     public function update(UpdateDossierRequest $request, Dossier $dossier)

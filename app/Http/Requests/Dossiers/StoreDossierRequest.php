@@ -23,6 +23,7 @@ class StoreDossierRequest extends FormRequest
             'date_arrive' => 'required|date',
             'user_id' => 'required|integer|exists:users,id',
             'annexe_id' => 'nullable|integer|exists:annexes,id',
+            'district_id' => 'nullable|integer|exists:districts,id',
         ];
     }
 }

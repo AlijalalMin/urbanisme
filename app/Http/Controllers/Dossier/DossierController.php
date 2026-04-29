@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Dossier;
 
+use App\Domain\Annexes\Models\Annexe;
 use App\Domain\Dossiers\DTO\DossierData;
 use App\Domain\Dossiers\Models\Dossier;
+use App\Domain\Dossiers\Services\DossierService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dossiers\StoreDossierRequest;
 use App\Http\Requests\Dossiers\UpdateDossierRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Domain\Annexes\Models\Annexe;
-use App\Domain\Dossiers\Services\DossierService;
 
 class DossierController extends Controller
 {
@@ -18,10 +18,13 @@ class DossierController extends Controller
         private DossierService $dossierService
     ) {}
 
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
+        $filters = $request->only(['search', 'status']);
+
         return Inertia::render('Dossiers/Index', [
-            'dossiers' => $this->dossierService->getPaginatedList(),
+            'dossiers' => $this->dossierService->getPaginatedList($filters),
+            'filters' => $filters,
         ]);
     }
 
@@ -33,8 +36,17 @@ class DossierController extends Controller
         }
 
         return Inertia::render('Dossiers/Create', [
-            'annexes' => Annexe::all(),
-            'dossier' => $dossier,
+            'annexes' => Annexe::with('district')->get(),
+            'districts' => \App\Domain\Districts\Models\District::all(),
+        ]);
+    }
+
+    public function edit(Dossier $dossier)
+    {
+        return Inertia::render('Dossiers/Edit', [
+            'dossier' => $this->dossierService->showDossier($dossier->id),
+            'annexes' => Annexe::with('district')->get(),
+            'districts' => \App\Domain\Districts\Models\District::all(),
         ]);
     }
 

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('role')->nullable();
 
             $table->foreignId('pv_id')
-                    ->nullable()
-                    ->constrained('pvs')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('pvs')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

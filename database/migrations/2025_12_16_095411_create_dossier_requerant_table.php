@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('dossier_requerant', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
             $table->foreignId('requerant_id')
-                    ->nullable()
-                    ->constrained('requerants')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('requerants')
+                ->nullOnDelete();
 
             $table->string('role')->nullable();
             $table->text('commentaire')->nullable();

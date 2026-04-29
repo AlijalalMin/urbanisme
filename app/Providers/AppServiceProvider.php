@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(DossierRepositoryInterface::class, DossierRepository::class);
         $this->app->bind(RequerantRepositoryInterface::class, RequerantRepository::class);
         $this->app->bind(AuteurRepositoryInterface::class, AuteurRepository::class);
+        $this->app->bind(
+            \App\Domain\Infractions\Repositories\InfractionRepositoryInterface::class,
+            \App\Domain\Infractions\Repositories\InfractionRepository::class
+        );
     }
 
     /**

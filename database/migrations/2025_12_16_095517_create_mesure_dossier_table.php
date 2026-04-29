@@ -22,9 +22,9 @@ return new class extends Migration
             $table->date('date_execution')->nullable();
 
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

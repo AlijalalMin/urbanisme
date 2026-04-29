@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\MesureTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\MesureTypeEnum;
 
 return new class extends Migration
 {
@@ -22,9 +22,9 @@ return new class extends Migration
             $table->text('preuve')->nullable();
 
             $table->foreignId('pv_id')
-                    ->nullable()
-                    ->constrained('pvs')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('pvs')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

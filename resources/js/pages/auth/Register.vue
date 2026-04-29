@@ -13,10 +13,10 @@ import { Form, Head } from '@inertiajs/vue3';
 
 <template>
     <AuthBase
-        title="Create an account"
-        description="Enter your details below to create your account"
+        title="Créer un compte"
+        description="Saisissez vos informations pour rejoindre la plateforme"
     >
-        <Head title="Register" />
+        <Head title="Inscription" />
 
         <Form
             v-bind="store.form()"
@@ -26,7 +26,7 @@ import { Form, Head } from '@inertiajs/vue3';
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="name">Name</Label>
+                    <Label for="name" class="text-slate-700 dark:text-slate-300">Nom complet</Label>
                     <Input
                         id="name"
                         type="text"
@@ -35,13 +35,14 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="1"
                         autocomplete="name"
                         name="name"
-                        placeholder="Full name"
+                        placeholder="Votre nom"
+                        class="rounded-xl border-slate-200 dark:border-slate-800 focus:ring-blue-500"
                     />
                     <InputError :message="errors.name" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email" class="text-slate-700 dark:text-slate-300">Adresse e-mail</Label>
                     <Input
                         id="email"
                         type="email"
@@ -49,13 +50,14 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="2"
                         autocomplete="email"
                         name="email"
-                        placeholder="email@example.com"
+                        placeholder="nom@exemple.com"
+                        class="rounded-xl border-slate-200 dark:border-slate-800 focus:ring-blue-500"
                     />
                     <InputError :message="errors.email" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                    <Label for="password" class="text-slate-700 dark:text-slate-300">Mot de passe</Label>
                     <Input
                         id="password"
                         type="password"
@@ -63,13 +65,14 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="3"
                         autocomplete="new-password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="••••••••"
+                        class="rounded-xl border-slate-200 dark:border-slate-800 focus:ring-blue-500"
                     />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
+                    <Label for="password_confirmation" class="text-slate-700 dark:text-slate-300">Confirmer le mot de passe</Label>
                     <Input
                         id="password_confirmation"
                         type="password"
@@ -77,30 +80,31 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="4"
                         autocomplete="new-password"
                         name="password_confirmation"
-                        placeholder="Confirm password"
+                        placeholder="••••••••"
+                        class="rounded-xl border-slate-200 dark:border-slate-800 focus:ring-blue-500"
                     />
                     <InputError :message="errors.password_confirmation" />
                 </div>
 
                 <Button
                     type="submit"
-                    class="mt-2 w-full"
+                    class="mt-2 w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20 transition-all active:scale-95"
                     tabindex="5"
                     :disabled="processing"
                     data-test="register-user-button"
                 >
                     <Spinner v-if="processing" />
-                    Create account
+                    Créer le compte
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
-                Already have an account?
+            <div class="text-center text-sm text-slate-600 dark:text-slate-400">
+                Vous avez déjà un compte ?
                 <TextLink
                     :href="login()"
-                    class="underline underline-offset-4"
+                    class="font-semibold text-blue-600 dark:text-blue-400"
                     :tabindex="6"
-                    >Log in</TextLink
+                    >Se connecter</TextLink
                 >
             </div>
         </Form>

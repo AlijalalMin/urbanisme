@@ -13,14 +13,15 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { index as dossiersIndex } from '@/routes/dossiers';
+import { index as infractionsIndex } from '@/routes/infractions';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, FolderOpen, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, FolderOpen, LayoutGrid, ShieldAlert } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Tableau de bord',
         href: dashboard().url,
         icon: LayoutGrid,
     },
@@ -29,11 +30,16 @@ const mainNavItems: NavItem[] = [
         href: dossiersIndex().url,
         icon: FolderOpen,
     },
+    {
+        title: 'Infractions',
+        href: infractionsIndex().url,
+        icon: ShieldAlert,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Github Repo',
+        title: 'Dépôt Github',
         href: 'https://github.com/laravel/vue-starter-kit',
         icon: Folder,
     },

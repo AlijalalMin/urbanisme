@@ -6,7 +6,7 @@ use App\Domain\Dossiers\Models\Dossier;
 
 interface DossierRepositoryInterface
 {
-    public function getAll(int $perPage = 20);
+    public function getAll(int $perPage = 20, array $filters = []);
 
     public function find(int $id);
 

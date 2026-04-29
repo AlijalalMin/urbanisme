@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('infraction_type', function (Blueprint $table) {
             $table->id();
             $table->foreignId('infraction_id')
-                    ->nullable()
-                    ->constrained('infractions')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('infractions')
+                ->nullOnDelete();
             $table->foreignId('type_id')
-                    ->nullable()
-                    ->constrained('type_infractions')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('type_infractions')
+                ->nullOnDelete();
 
             $table->integer('niveau_gravite')->nullable();
             $table->text('commentaire')->nullable();

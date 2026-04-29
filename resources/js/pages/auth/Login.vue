@@ -21,14 +21,14 @@ defineProps<{
 
 <template>
     <AuthBase
-        title="Log in to your account"
-        description="Enter your email and password below to log in"
+        title="Connexion"
+        description="Saisissez vos identifiants pour accéder à votre espace"
     >
-        <Head title="Log in" />
+        <Head title="Connexion" />
 
         <div
             v-if="status"
-            class="mb-4 text-center text-sm font-medium text-green-600"
+            class="mb-4 text-center text-sm font-medium text-green-600 dark:text-green-400"
         >
             {{ status }}
         </div>
@@ -41,7 +41,7 @@ defineProps<{
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email" class="text-slate-700 dark:text-slate-300">Adresse e-mail</Label>
                     <Input
                         id="email"
                         type="email"
@@ -50,21 +50,22 @@ defineProps<{
                         autofocus
                         :tabindex="1"
                         autocomplete="email"
-                        placeholder="email@example.com"
+                        placeholder="nom@exemple.com"
+                        class="rounded-xl border-slate-200 dark:border-slate-800 focus:ring-blue-500"
                     />
                     <InputError :message="errors.email" />
                 </div>
 
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
-                        <Label for="password">Password</Label>
+                        <Label for="password" class="text-slate-700 dark:text-slate-300">Mot de passe</Label>
                         <TextLink
                             v-if="canResetPassword"
                             :href="request()"
-                            class="text-sm"
+                            class="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400"
                             :tabindex="5"
                         >
-                            Forgot password?
+                            Mot de passe oublié ?
                         </TextLink>
                     </div>
                     <Input
@@ -74,36 +75,37 @@ defineProps<{
                         required
                         :tabindex="2"
                         autocomplete="current-password"
-                        placeholder="Password"
+                        placeholder="••••••••"
+                        class="rounded-xl border-slate-200 dark:border-slate-800 focus:ring-blue-500"
                     />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="flex items-center justify-between">
-                    <Label for="remember" class="flex items-center space-x-3">
+                    <Label for="remember" class="flex items-center space-x-3 cursor-pointer">
                         <Checkbox id="remember" name="remember" :tabindex="3" />
-                        <span>Remember me</span>
+                        <span class="text-sm text-slate-600 dark:text-slate-400">Se souvenir de moi</span>
                     </Label>
                 </div>
 
                 <Button
                     type="submit"
-                    class="mt-4 w-full"
+                    class="mt-4 w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20 transition-all active:scale-95"
                     :tabindex="4"
                     :disabled="processing"
                     data-test="login-button"
                 >
                     <Spinner v-if="processing" />
-                    Log in
+                    Se connecter
                 </Button>
             </div>
 
             <div
-                class="text-center text-sm text-muted-foreground"
+                class="text-center text-sm text-slate-600 dark:text-slate-400"
                 v-if="canRegister"
             >
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                Vous n'avez pas de compte ?
+                <TextLink :href="register()" :tabindex="5" class="font-semibold text-blue-600 dark:text-blue-400">S'inscrire</TextLink>
             </div>
         </Form>
     </AuthBase>

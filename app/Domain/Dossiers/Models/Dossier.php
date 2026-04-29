@@ -26,6 +26,7 @@ class Dossier extends Model
         'description_initiale',
         'user_id',
         'annexe_id',
+        'district_id',
     ];
 
     public $timestamps = true;
@@ -33,6 +34,11 @@ class Dossier extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(\App\Domain\Districts\Models\District::class);
     }
 
     public function annexe()

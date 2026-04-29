@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\PvTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\PvTypeEnum;
 
 return new class extends Migration
 {
@@ -23,14 +23,14 @@ return new class extends Migration
             $table->string('statut')->nullable();
 
             $table->foreignId('dossier_id')
-                    ->nullable()
-                    ->constrained('dossiers')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('dossiers')
+                ->nullOnDelete();
 
             $table->foreignId('redacteur_id')
-                    ->nullable()
-                    ->constrained('users')
-                    ->nullOnDelete();
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Domain\Districts\Models\District;
 use App\Domain\Annexes\Models\Annexe;
+use App\Domain\Districts\Models\District;
+use Illuminate\Database\Seeder;
 
 class DistrictSeeder extends Seeder
 {
@@ -21,7 +20,7 @@ class DistrictSeeder extends Seeder
                     'حسنا الشمالية',
                     'المصلى',
                     'بن المودون',
-                ]
+                ],
             ],
 
             [
@@ -31,7 +30,7 @@ class DistrictSeeder extends Seeder
                 'annexes' => [
                     'كاليفورنيا',
                     'شريفه',
-                ]
+                ],
             ],
 
             [
@@ -43,7 +42,7 @@ class DistrictSeeder extends Seeder
                     'جنانات',
                     'أولاد راحو',
                     'المستقبل',
-                ]
+                ],
             ],
 
             [
@@ -53,7 +52,7 @@ class DistrictSeeder extends Seeder
                 'annexes' => [
                     'حسنا الجنوبية',
                     'سيدي مسعود',
-                ]
+                ],
             ],
         ];
 
@@ -67,7 +66,7 @@ class DistrictSeeder extends Seeder
             foreach ($data['annexes'] as $annexe) {
                 Annexe::create([
                     'nom' => $annexe,
-                    'district_id' => $district->id
+                    'district_id' => $district->id,
                 ]);
             }
         }

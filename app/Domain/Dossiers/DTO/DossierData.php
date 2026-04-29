@@ -20,7 +20,8 @@ class DossierData
         public ?string $description_initiale,
         public ?string $date_arrive,
         public int $user_id,
-        public ?int $annexe_id
+        public ?int $annexe_id,
+        public ?int $district_id
     ) {}
 
     public static function fromRequest(StoreDossierRequest $request): self
@@ -40,6 +41,7 @@ class DossierData
             date_arrive: $request->date_arrive,
             user_id: $request->user_id,
             annexe_id: $request->annexe_id,
+            district_id: $request->district_id,
         );
     }
 

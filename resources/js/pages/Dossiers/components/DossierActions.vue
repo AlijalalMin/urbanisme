@@ -15,13 +15,19 @@ function deleteDossier(): void {
         router.delete(dossierDestroy(props.dossier).url);
     }
 }
+/* function editDossier(): void {
+    router.push(dossiersUpdate(props.dossier).url);
+} */
 </script>
 
 <template>
     <div class="flex gap-2">
         <Button as-child variant="outline">
-            <Link :href="dossierShow(dossier).url">Voir</Link>
+            <Link :href="dossierShow(props.dossier).url">Voir</Link>
         </Button>
+<!--         <Button as-child variant="outline">
+            <Link :href="editDossier">Modifier</Link>
+        </Button> -->
         <Button variant="destructive" @click="deleteDossier">Supprimer</Button>
     </div>
 </template>
